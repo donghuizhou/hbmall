@@ -1,0 +1,29 @@
+{
+  "apps": [
+    {
+      "name": "hbmall",
+      "script": "prod.server.js",
+      "env": {
+        "COMMON_VARIABLE": "true"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "zhoudonghui",
+      "host": ["116.196.124.81"],
+      "port": "3999",
+      "ref": "origin/master",
+      "repo": "git@gitee.com:donghuizhou/hbmall.git",
+      "path": "/www/hbmall/production",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "post-deploy": "cnpm install && npm run build && pm2 startOrRestart ecosystem.json --env production",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
